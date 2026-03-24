@@ -20,3 +20,22 @@
   width: 100%;
 }
 </style>
+
+<style>
+.menu-link {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+.menu-open .menu-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* delay progresivo */
+.menu-open .menu-link:nth-child(2){transition-delay:0.1s;}
+.menu-open .menu-link:nth-child(3){transition-delay:0.2s;}
+.menu-open .menu-link:nth-child(4){transition-delay:0.3s;}
+.menu-open .menu-link:nth-child(5){transition-delay:0.4s;}
+</style>

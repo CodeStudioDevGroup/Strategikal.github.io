@@ -11,6 +11,28 @@
 <style>
 body{font-family:'Inter',sans-serif}
 </style>
+<style>
+.nav-link {
+  position: relative;
+  color: white;
+  transition: 0.3s;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: white;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+</style>
 
 </head>
 
@@ -25,11 +47,12 @@ body{font-family:'Inter',sans-serif}
       Strategikal
     </a>
 
+    <!-- SOLO ESTE MENU -->
     <div class="hidden md:flex gap-8 text-sm font-semibold text-white">
-      <a href="index.html">Inicio</a>
-      <a href="servicios.html">Servicios</a>
-      <a href="quienes.html">Quiénes Somos</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="index.html" class="nav-link">Inicio</a>
+      <a href="servicios.html" class="nav-link">Servicios</a>
+      <a href="quienes.html" class="nav-link">Quiénes Somos</a>
+      <a href="contacto.html" class="nav-link">Contacto</a>
     </div>
 
     <a href="https://wa.me/573183776206?text=Hola,%20quiero%20asesoría"
@@ -37,8 +60,32 @@ body{font-family:'Inter',sans-serif}
        Contactar
     </a>
 
+        <!-- BOTON MOBILE -->
+    <button id="openMenu" class="md:hidden text-white text-3xl">
+      ☰
+    </button>
+
   </div>
 </nav>
+
+<div id="mobileMenu" class="fixed inset-0 bg-black/90 backdrop-blur-xl flex flex-col justify-center items-center space-y-10 text-2xl font-semibold text-white transform translate-x-full opacity-0 transition-all duration-500 z-50">
+
+  <!-- CERRAR -->
+  <button id="closeMenu" class="absolute top-6 right-6 text-4xl">
+    ✕
+  </button>
+
+  <a href="index.html" class="menu-link">Inicio</a>
+  <a href="servicios.html" class="menu-link">Servicios</a>
+  <a href="quienes.html" class="menu-link">Quiénes Somos</a>
+  <a href="contacto.html" class="menu-link">Contacto</a>
+
+  <a href="https://wa.me/573183776206"
+     class="mt-6 bg-green-500 px-8 py-3 rounded-xl text-lg hover:scale-105 transition">
+     WhatsApp
+  </a>
+
+</div>
 
     <!-- MENU -->
     <div class="hidden md:flex gap-8 font-semibold">
@@ -125,6 +172,30 @@ body{font-family:'Inter',sans-serif}
   </a>
 
 </div>
+
+<script>
+const openBtn = document.getElementById("openMenu");
+const closeBtn = document.getElementById("closeMenu");
+const menu = document.getElementById("mobileMenu");
+
+openBtn.addEventListener("click", () => {
+  menu.classList.remove("translate-x-full", "opacity-0");
+  menu.classList.add("menu-open");
+});
+
+closeBtn.addEventListener("click", () => {
+  menu.classList.add("translate-x-full", "opacity-0");
+  menu.classList.remove("menu-open");
+});
+
+/* cerrar al hacer click fuera */
+menu.addEventListener("click", (e) => {
+  if(e.target === menu){
+    menu.classList.add("translate-x-full", "opacity-0");
+    menu.classList.remove("menu-open");
+  }
+});
+</script>
 
 </body>
 </html>

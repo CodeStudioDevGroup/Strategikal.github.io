@@ -32,13 +32,30 @@ body{font-family:'Inter',sans-serif}
 .nav-link:hover::after {
   width: 100%;
 }
+
+/* MOBILE MENU ANIMATION */
+.menu-link {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+.menu-open .menu-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-open .menu-link:nth-child(2){transition-delay:0.1s;}
+.menu-open .menu-link:nth-child(3){transition-delay:0.2s;}
+.menu-open .menu-link:nth-child(4){transition-delay:0.3s;}
+.menu-open .menu-link:nth-child(5){transition-delay:0.4s;}
 </style>
 
 </head>
 
 <body class="bg-black text-white">
 
-<!-- NAVBAR PREMIUM -->
+<!-- NAVBAR -->
 <nav id="navbar" class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-lg">
 
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -48,10 +65,10 @@ body{font-family:'Inter',sans-serif}
     </a>
 
     <div class="hidden md:flex gap-8 text-sm font-semibold text-white">
-      <a href="index.html">Inicio</a>
-      <a href="servicios.html">Servicios</a>
-      <a href="quienes.html">Quiénes Somos</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="index.html" class="nav-link">Inicio</a>
+      <a href="servicios.html" class="nav-link">Servicios</a>
+      <a href="quienes.html" class="nav-link">Quiénes Somos</a>
+      <a href="contacto.html" class="nav-link">Contacto</a>
     </div>
 
     <a href="https://wa.me/573183776206?text=Hola,%20quiero%20asesoría"
@@ -59,24 +76,37 @@ body{font-family:'Inter',sans-serif}
        Contactar
     </a>
 
+    <!-- BOTON MOBILE -->
+    <button id="openMenu" class="md:hidden text-white text-3xl">
+      ☰
+    </button>
+
   </div>
 </nav>
 
-  <!-- MOBILE -->
-  <div id="mobile-menu" class="hidden flex-col bg-black text-white px-6 pb-6 space-y-4 md:hidden">
-    <a href="index.html">Inicio</a>
-    <a href="servicios.html">Servicios</a>
-    <a href="quienes.html">Quiénes Somos</a>
-    <a href="contacto.html">Contacto</a>
-  </div>
+<!-- MENU MOBILE PREMIUM -->
+<div id="mobileMenu" class="fixed inset-0 bg-black/90 backdrop-blur-xl flex flex-col justify-center items-center space-y-10 text-2xl font-semibold text-white transform translate-x-full opacity-0 transition-all duration-500 z-50">
 
-</nav>
+  <button id="closeMenu" class="absolute top-6 right-6 text-4xl">
+    ✕
+  </button>
+
+  <a href="index.html" class="menu-link">Inicio</a>
+  <a href="servicios.html" class="menu-link">Servicios</a>
+  <a href="quienes.html" class="menu-link">Quiénes Somos</a>
+  <a href="contacto.html" class="menu-link">Contacto</a>
+
+  <a href="https://wa.me/573183776206"
+     class="mt-6 bg-green-500 px-8 py-3 rounded-xl text-lg hover:scale-105 transition">
+     WhatsApp
+  </a>
+
+</div>
 
 <!-- HERO -->
 <section class="min-h-screen flex items-center px-6 pt-32">
   <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
 
-    <!-- TEXTO -->
     <div>
       <h1 class="text-5xl md:text-6xl font-extrabold mb-6 leading-tight">
         Innovación y Excelencia en Servicios Integrales
@@ -99,7 +129,6 @@ body{font-family:'Inter',sans-serif}
       </div>
     </div>
 
-    <!-- IMAGEN PRINCIPAL -->
     <div>
       <img src="imagenes/secre.png"
            class="rounded-2xl shadow-2xl object-cover w-full h-[400px]">
@@ -142,7 +171,7 @@ body{font-family:'Inter',sans-serif}
   </div>
 </section>
 
-<!-- BLOQUE DE CONFIANZA -->
+<!-- BLOQUE -->
 <section class="py-20 px-6">
   <div class="max-w-5xl mx-auto text-center">
 
@@ -175,26 +204,36 @@ body{font-family:'Inter',sans-serif}
 
 <!-- SCRIPT -->
 <script>
-
-// SCROLL NAVBAR
 window.addEventListener("scroll", function() {
   const nav = document.getElementById("navbar");
 
   if (window.scrollY > 50) {
     nav.classList.add("bg-black/80", "backdrop-blur-lg", "shadow-lg");
   } else {
-    nav.classList.remove("bg-black/80", "backdrop-blur-lg", "shadow-lg");
+    nav.classList.remove("shadow-lg");
   }
 });
 
-// MOBILE MENU
-const btn = document.getElementById("menu-btn");
-const menu = document.getElementById("mobile-menu");
+const openBtn = document.getElementById("openMenu");
+const closeBtn = document.getElementById("closeMenu");
+const menu = document.getElementById("mobileMenu");
 
-btn.addEventListener("click", () => {
-  menu.classList.toggle("hidden");
+openBtn.addEventListener("click", () => {
+  menu.classList.remove("translate-x-full", "opacity-0");
+  menu.classList.add("menu-open");
 });
 
+closeBtn.addEventListener("click", () => {
+  menu.classList.add("translate-x-full", "opacity-0");
+  menu.classList.remove("menu-open");
+});
+
+menu.addEventListener("click", (e) => {
+  if(e.target === menu){
+    menu.classList.add("translate-x-full", "opacity-0");
+    menu.classList.remove("menu-open");
+  }
+});
 </script>
 
 </body>

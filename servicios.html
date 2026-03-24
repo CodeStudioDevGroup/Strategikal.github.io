@@ -30,7 +30,22 @@ body{
 }
 .nav-link:hover::after{width:100%}
 
-/* CARD PREMIUM */
+/* MOBILE MENU */
+.menu-link {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+.menu-open .menu-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+.menu-open .menu-link:nth-child(2){transition-delay:0.1s;}
+.menu-open .menu-link:nth-child(3){transition-delay:0.2s;}
+.menu-open .menu-link:nth-child(4){transition-delay:0.3s;}
+.menu-open .menu-link:nth-child(5){transition-delay:0.4s;}
+
+/* CARD */
 .card{
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(12px);
@@ -42,38 +57,34 @@ body{
   box-shadow: 0 20px 40px rgba(0,0,0,0.4);
 }
 
-/* SLIDER PREMIUM */
+/* SLIDER */
 .slider{
   overflow:hidden;
   border-radius:16px;
   position:relative;
 }
-
 .slide-track{
   display:flex;
   width:300%;
   animation: scroll 15s infinite linear;
 }
-
 .slide-track img{
   width:100%;
   height:260px;
   object-fit:cover;
 }
-
-/* ANIMACION */
 @keyframes scroll {
   0%{transform:translateX(0);}
   100%{transform:translateX(-100%);}
 }
 
-/* TEXTO */
+/* TEXT */
 .section-title{
   font-size:2rem;
   font-weight:800;
 }
 
-/* BOTON */
+/* BUTTON */
 .btn{
   background:#25D366;
   padding:12px 24px;
@@ -102,7 +113,7 @@ body{
 
 <div class="glow"></div>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav id="navbar" class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-lg">
 
   <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -112,10 +123,10 @@ body{
     </a>
 
     <div class="hidden md:flex gap-8 text-sm font-semibold text-white">
-      <a href="index.html">Inicio</a>
-      <a href="servicios.html">Servicios</a>
-      <a href="quienes.html">Quiénes Somos</a>
-      <a href="contacto.html">Contacto</a>
+      <a href="index.html" class="nav-link">Inicio</a>
+      <a href="servicios.html" class="nav-link">Servicios</a>
+      <a href="quienes.html" class="nav-link">Quiénes Somos</a>
+      <a href="contacto.html" class="nav-link">Contacto</a>
     </div>
 
     <a href="https://wa.me/573183776206?text=Hola,%20quiero%20asesoría"
@@ -123,15 +134,36 @@ body{
        Contactar
     </a>
 
+    <!-- BOTON MOBILE -->
+    <button id="openMenu" class="md:hidden text-white text-3xl">
+      ☰
+    </button>
+
   </div>
 </nav>
+
+<!-- MENU MOBILE -->
+<div id="mobileMenu" class="fixed inset-0 bg-black/90 backdrop-blur-xl flex flex-col justify-center items-center space-y-10 text-2xl font-semibold text-white transform translate-x-full opacity-0 transition-all duration-500 z-50">
+
+  <button id="closeMenu" class="absolute top-6 right-6 text-4xl">✕</button>
+
+  <a href="index.html" class="menu-link">Inicio</a>
+  <a href="servicios.html" class="menu-link">Servicios</a>
+  <a href="quienes.html" class="menu-link">Quiénes Somos</a>
+  <a href="contacto.html" class="menu-link">Contacto</a>
+
+  <a href="https://wa.me/573183776206"
+     class="mt-6 bg-green-500 px-8 py-3 rounded-xl text-lg hover:scale-105 transition">
+     WhatsApp
+  </a>
+
+</div>
 
 <!-- CONTENIDO -->
 <section class="pt-32 pb-20 max-w-6xl mx-auto px-6 space-y-20">
 
 <!-- CARD 1 -->
 <div class="card p-8 grid md:grid-cols-2 gap-8 items-center">
-
   <div class="slider">
     <div class="slide-track">
       <img src="https://images.unsplash.com/photo-1554224154-26032ffc0d07">
@@ -142,24 +174,19 @@ body{
 
   <div>
     <h2 class="section-title mb-4">Consultorías</h2>
-    <p class="text-gray-300 mb-6">
-      Asesoría estratégica empresarial con enfoque profesional.
-    </p>
-
+    <p class="text-gray-300 mb-6">Asesoría estratégica empresarial con enfoque profesional.</p>
     <ul class="space-y-2 mb-6">
       <li>• Consultorías administrativas</li>
       <li>• Arquitectura</li>
       <li>• Licencias</li>
       <li>• Pozos sépticos</li>
     </ul>
-
     <a href="https://wa.me/573183776206" class="btn">WhatsApp</a>
   </div>
 </div>
 
 <!-- CARD 2 -->
 <div class="card p-8 grid md:grid-cols-2 gap-8 items-center">
-
   <div class="slider">
     <div class="slide-track">
       <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85">
@@ -170,24 +197,19 @@ body{
 
   <div>
     <h2 class="section-title mb-4">Trámites</h2>
-    <p class="text-gray-300 mb-6">
-      Procesos legales y administrativos eficientes.
-    </p>
-
+    <p class="text-gray-300 mb-6">Procesos legales y administrativos eficientes.</p>
     <ul class="space-y-2 mb-6">
       <li>• Registro</li>
       <li>• Curaduría</li>
       <li>• Ambiental</li>
       <li>• Avalúos</li>
     </ul>
-
     <a href="https://wa.me/573183776206" class="btn">WhatsApp</a>
   </div>
 </div>
 
 <!-- CARD 3 -->
 <div class="card p-8 grid md:grid-cols-2 gap-8 items-center">
-
   <div class="slider">
     <div class="slide-track">
       <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e">
@@ -198,17 +220,13 @@ body{
 
   <div>
     <h2 class="section-title mb-4">Infraestructura</h2>
-    <p class="text-gray-300 mb-6">
-      Gestión integral de proyectos y espacios.
-    </p>
-
+    <p class="text-gray-300 mb-6">Gestión integral de proyectos y espacios.</p>
     <ul class="space-y-2 mb-6">
       <li>• Administración</li>
       <li>• Mantenimiento</li>
       <li>• Hospitalaria</li>
       <li>• Diseños eléctricos</li>
     </ul>
-
     <a href="https://wa.me/573183776206" class="btn">WhatsApp</a>
   </div>
 </div>
@@ -217,16 +235,37 @@ body{
 
 <!-- REDES -->
 <div class="fixed bottom-6 right-6 flex flex-col gap-4">
-
   <a href="https://wa.me/573183776206">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" class="w-14 hover:scale-110">
   </a>
-
   <a href="https://www.instagram.com/alstrategik">
     <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" class="w-14 hover:scale-110">
   </a>
-
 </div>
+
+<!-- SCRIPT -->
+<script>
+const openBtn = document.getElementById("openMenu");
+const closeBtn = document.getElementById("closeMenu");
+const menu = document.getElementById("mobileMenu");
+
+openBtn.addEventListener("click", () => {
+  menu.classList.remove("translate-x-full", "opacity-0");
+  menu.classList.add("menu-open");
+});
+
+closeBtn.addEventListener("click", () => {
+  menu.classList.add("translate-x-full", "opacity-0");
+  menu.classList.remove("menu-open");
+});
+
+menu.addEventListener("click", (e) => {
+  if(e.target === menu){
+    menu.classList.add("translate-x-full", "opacity-0");
+    menu.classList.remove("menu-open");
+  }
+});
+</script>
 
 </body>
 </html>
